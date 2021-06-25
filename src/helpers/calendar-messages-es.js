@@ -1,4 +1,4 @@
-export const messages = {
+const messages = {
     allDay: 'Todo el día',
     previous: '<',
     next: '>',
@@ -13,3 +13,5 @@ export const messages = {
     noEventsInRange: 'No hay eventos en este rango',
     showMore: total => `+ Ver más (${total})`
 };
+
+export default messages;
