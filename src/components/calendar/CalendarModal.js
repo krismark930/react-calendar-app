@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 
 const customStyles = {
@@ -25,6 +26,7 @@ const CalendarModal = () => {
 
     const [ dateStart, setDateStart ] = useState( now.toDate() );
     const [ dateEnd, setDateEnd ] = useState( nowPlusOne.toDate() );
+    const [titleValid, setTitleValid] = useState(true);
     
     const [formValues, setFormValues] = useState({
         title: 'Evento',
@@ -44,10 +46,11 @@ const CalendarModal = () => {
     }
     
     
-    const { notes, title } = formValues;
+    const { notes, title, start, end } = formValues;
     
     
     const closeModal = () => {
+        // TODO: cerrar el modal
     }
 
     const handleStartDateChange = ( e ) => {
@@ -64,6 +67,27 @@ const CalendarModal = () => {
             ...formValues,
             end: e
         });
+    }
+
+    const handleSubmitForm = ( e ) => {
+        e.preventDefault();
+        
+        const momentStart = moment( start );
+        const momentEnd = moment( end );
+
+        if ( momentStart.isSameOrAfter( momentEnd ) ) {
+            return Swal.fire('Error', 'Start date should be smaller than end date', 'error');
+        }
+
+        if ( title.trim().length < 2 ) {
+            return setTitleValid(false);
+        }
+
+        // TODO: realizar grabación
+        
+        setTitleValid(true);
+        
+        closeModal();
     }
     
     
@@ -109,7 +133,7 @@ const CalendarModal = () => {
                     <label>Titulo y notas</label>
                     <input 
                         type="text" 
-                        className="form-control"
+                        className={`form-control ${ !titleValid && 'is-invalid' } `}
                         placeholder="Título del evento"
                         name="title"
                         value={ title }
