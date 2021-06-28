@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 
 
 import { uiCloseModal } from '../../actions/ui';
+import { eventAddNew } from '../../actions/events';
 
 
 const customStyles = {
@@ -93,6 +94,10 @@ const CalendarModal = () => {
         }
 
         // TODO: realizar grabación
+        dispatch( eventAddNew({
+            ...formValues,
+            id: new Date().getTime()
+        }) );
         
         setTitleValid(true);
         
