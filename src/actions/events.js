@@ -14,3 +14,10 @@ export const eventAddNew = ( event ) => ({
     payload: event
 
 });
+
+export const eventClearActiveEvent = () => ({ type: types.eventClearActive });
+
+export const eventUpdated = ( event ) => ({
+    type: types.eventUpdated,
+    payload: event
+});

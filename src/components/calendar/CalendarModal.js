@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from 'react-modal';
@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 
 
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew } from '../../actions/events';
+import { eventAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
 
 
 const customStyles = {
@@ -29,21 +29,38 @@ const now = moment().minutes(0).seconds(0).add(1, 'hours');
 const nowPlusOne = now.clone().add('1', 'hours');
 
 
+const initEvent = {
+    title: '',
+    notes: '',
+    start: now.toDate(),
+    end: nowPlusOne.toDate()
+}
+
+
 const CalendarModal = () => {
 
     const dispatch = useDispatch();
-    const { modalOpen } = useSelector(state => state.ui);
+    const { modalOpen } = useSelector(state => state.ui );
+    const { activeEvent } = useSelector(state => state.calendar );
 
-    const [ dateStart, setDateStart ] = useState( now.toDate() );
-    const [ dateEnd, setDateEnd ] = useState( nowPlusOne.toDate() );
+    const [ , setDateStart ] = useState( now.toDate() );
+    const [ , setDateEnd ] = useState( nowPlusOne.toDate() );
     const [titleValid, setTitleValid] = useState(true);
     
-    const [formValues, setFormValues] = useState({
-        title: 'Evento',
-        notes: '',
-        start: now.toDate(),
-        end: nowPlusOne.toDate()
-    });
+    const [formValues, setFormValues] = useState( initEvent );
+
+    const { notes, title, start, end } = formValues;
+    
+
+    useEffect(() => {
+
+        if ( activeEvent ) {
+            setFormValues( activeEvent );
+        } else {
+            setFormValues( initEvent );
+        }
+        
+    }, [ activeEvent ]);
     
     const handleInputChange = ( { target } ) => {
 
@@ -55,12 +72,10 @@ const CalendarModal = () => {
         
     }
     
-    
-    const { notes, title, start, end } = formValues;
-    
-    
     const closeModal = () => {
         dispatch( uiCloseModal() );
+        dispatch( eventClearActiveEvent() );
+        setFormValues( initEvent );
     }
 
     const handleStartDateChange = ( e ) => {
@@ -86,18 +101,26 @@ const CalendarModal = () => {
         const momentEnd = moment( end );
 
         if ( momentStart.isSameOrAfter( momentEnd ) ) {
-            return Swal.fire('Error', 'Start date should be smaller than end date', 'error');
+            return Swal.fire('Error', 'La fecha de inicio debe de ser menor a la de fin.', 'error');
         }
 
         if ( title.trim().length < 2 ) {
             return setTitleValid(false);
         }
 
-        // TODO: realizar grabación
-        dispatch( eventAddNew({
-            ...formValues,
-            id: new Date().getTime()
-        }) );
+        if ( activeEvent ) {
+            dispatch( eventUpdated( formValues ) );
+        } else {
+            dispatch( eventAddNew({
+                ...formValues,
+                id: new Date().getTime(),
+                user: {
+                    _id: new Date().getTime(),
+                    name: 'Omar'
+                }
+    
+            }) );
+        }
         
         setTitleValid(true);
         
@@ -127,7 +150,7 @@ const CalendarModal = () => {
                     <label>Fecha y hora inicio</label>
                     <DateTimePicker
                         onChange={ handleStartDateChange }
-                        value={ dateStart }
+                        value={ start }
                         className="form-control"
                     />
                 </div>
@@ -136,8 +159,8 @@ const CalendarModal = () => {
                     <label>Fecha y hora fin</label>
                     <DateTimePicker
                         onChange={ handleEndDateChange }
-                        value={ dateEnd }
-                        minDate={ dateStart }
+                        value={ end }
+                        minDate={ start }
                         className="form-control"
                     />
                 </div>
