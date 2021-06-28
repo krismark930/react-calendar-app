@@ -14,8 +14,9 @@ import 'moment/locale/es';
 
 import CalendarModal from './CalendarModal';
 import { uiOpenModal } from '../../actions/ui';
-import { eventSetActive } from '../../actions/events';
+import { eventClearActiveEvent, eventSetActive } from '../../actions/events';
 import AddNewFab from '../ui/AddNewFab';
+import DeleteEventFab from '../ui/DeleteEventFab';
 
 moment.locale('es');
 
@@ -26,7 +27,7 @@ const localizer = momentLocalizer(moment); // or globalizeLocalizer
 const CalendarScreen = () => {
 
     const dispatch = useDispatch();
-    const { events } = useSelector( state => state.calendar );
+    const { events, activeEvent } = useSelector( state => state.calendar );
     
     const [lastView, setLastView] = useState( localStorage.getItem('lastView')  || 'month' );
     
@@ -44,6 +45,9 @@ const CalendarScreen = () => {
         localStorage.setItem('lastView', e);
     }
     
+    const onSelectSlot = ( e ) => {
+        dispatch( eventClearActiveEvent() );
+    }
     
     const eventStyleGetter = ( event, start, end, isSelected ) => {
 
@@ -76,6 +80,8 @@ const CalendarScreen = () => {
                 onDoubleClickEvent={ onDoubleClick }
                 onSelectEvent={ onSelectEvent }
                 onView={ onViewChange }
+                onSelectSlot={ onSelectSlot }
+                selectable={ true }
                 view={ lastView }
                 components={{
                     event: CalendarEvent
@@ -83,6 +89,9 @@ const CalendarScreen = () => {
             />
 
             <AddNewFab />
+            {
+                activeEvent && <DeleteEventFab />
+            }
 
             <CalendarModal />
             
