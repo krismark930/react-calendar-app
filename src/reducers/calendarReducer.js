@@ -30,6 +30,11 @@ const calendarReducer = ( state = initialState, action ) => {
                 activeEvent: action.payload
             }
 
+        case types.eventLogout:
+            return {
+                ...initialState
+            }
+
         case types.eventAddNew:
             return {
                 ...state,

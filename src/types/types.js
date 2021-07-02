@@ -6,6 +6,7 @@ const types = {
 
     // Calendar
     eventSetActive: '[event] Set Active',
+    eventLogout: '[event] Logout event',
 
     eventStartAddNew: '[event] Start add new',
     eventAddNew: '[event] Add new',
