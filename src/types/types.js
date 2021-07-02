@@ -6,6 +6,8 @@ const types = {
 
     // Calendar
     eventSetActive: '[event] Set Active',
+
+    eventStartAddNew: '[event] Start add new',
     eventAddNew: '[event] Add new',
     eventClearActive: '[event] Clear Active',
     eventUpdated: '[event] Event updated',

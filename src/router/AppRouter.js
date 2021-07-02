@@ -40,7 +40,7 @@ const AppRouter = () => {
                     />
 
                     <PrivateRoutes
-                        isAuthenticated={ uid }
+                        isAuthenticated={ !!uid }
                         exact
                         path="/"
                         component={ CalendarScreen }
