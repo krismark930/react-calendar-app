@@ -12,7 +12,6 @@ const types = {
     eventDeleted: '[event] Event deleted',
 
     // Auth
-    authChecking: '[auth] Checking login state',
     authCheckingFinish: '[auth] Finish checking login state',
     authStartLogin: '[auth] Start login',
     authLogin: '[auth] Login',
