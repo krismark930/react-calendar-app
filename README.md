@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+# CalendarApp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+___
 
-## Available Scripts
+## Objetivo
 
-In the project directory, you can run:
+La idea de esta aplicación es que todo un equipo de trabajo dedicado a un proyecto, **por ejemplo un equipo de desarrollo**, tenga un **calendario personalizado compartido** en el cual todos los integrantes de dicho equipo puedan:
 
-### `yarn start`
+- ***Crear eventos***
+  
+   De tal manera que se pueda tener una **vista general** de que cuales son los eventos que están por venir y que pueden ser relevantes para todo el equipo, como lo podría ser una fecha de entrega, o simplemente tener una idea de en que se encuentra trabajando cada uno de los integrantes del equipo, e inclusive podrían ser eventos pasados de los cuales es impoartante **mantener un registro** ya que dichos eventos pueden ser creados en cualquier fecha, siempre y cuando su fecha de fin sea mayor a la fecha de inio.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Integrantes
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+> Carlos Beltran 
 
-### `yarn test`
+## Instrucciones de instalación
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+En caso de que se desee usar de manera local este proyecto es necesario clonar este repositorio (frontend) como el de [calendar-back](https://github.com/omar2959/calendar-back) en sus respectivas carpetas y de manera independiente.
 
-### `yarn build`
+### Para ambas carpetas (frontend y backend)
+Y desde la terminal ejecutar los siguientes comandos:
+>`$ npm install`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Lo que instalara todas las dependencias del proyecto
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Dentro de la carpeta de frontend
+>`$ npm start`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Para iniciar el proyecto en **localhost:3000**
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Dentro de la carpeta de ***backend***
+>`$ npm run dev`
+Para correr el servidor de express en localhost:4000
