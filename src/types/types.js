@@ -12,6 +12,7 @@ const types = {
     eventClearActive: '[event] Clear Active',
     eventUpdated: '[event] Event updated',
     eventDeleted: '[event] Event deleted',
+    eventLoaded: '[event] Events loaded',
 
     // Auth
     authCheckingFinish: '[auth] Finish checking login state',
