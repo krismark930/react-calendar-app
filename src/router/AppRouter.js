@@ -1,20 +1,22 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
     Redirect
 } from "react-router-dom";
 
 import LoginScreen from '../components/auth/LoginScreen';
 import CalendarScreen from '../components/calendar/CalendarScreen';
 import { startChecking } from '../actions/auth';
+import PublicRoutes from './PublicRoutes';
+import PrivateRoutes from './PrivateRoutes';
 
 const AppRouter = () => {
 
 
     const dispatch = useDispatch();
+    const { checking, uid } = useSelector( state => state.auth );
 
     useEffect(() => {
         
@@ -22,18 +24,23 @@ const AppRouter = () => {
         
     }, [ dispatch ]);
     
-    
+    if ( checking ) {
+        return (<h5>Espere...</h5>);
+    }
+
     return (
         <Router>
             <div>
                 <Switch >
-                    <Route 
+                    <PublicRoutes
+                        isAuthenticated={ !!uid } // doble exclamación para convertir a booleano
                         exact
                         path="/login"
                         component={ LoginScreen }
                     />
 
-                    <Route 
+                    <PrivateRoutes
+                        isAuthenticated={ uid }
                         exact
                         path="/"
                         component={ CalendarScreen }
